@@ -40,24 +40,14 @@ app/directives/tip.js
 app/directives/all.js
 app/filters/all.js
 app/app.js
-<<<<<<< HEAD
 vendor/require/css.js
 vendor/require/text.js
 vendor/jquery/jquery.flot.js
 vendor/jquery/jquery.flot.pie.js
-=======
-vendor/jquery/jquery.flot.js
-vendor/jquery/jquery.flot.pie.js
-vendor/require/text.js
->>>>>>> 3446c24f3a651098f0a16ece681e0509f89dd22f
 
 app/panels/bettermap/module.js
 ----------------
 app/panels/bettermap/leaflet/leaflet-src.js
-<<<<<<< HEAD
-=======
-vendor/require/css.js
->>>>>>> 3446c24f3a651098f0a16ece681e0509f89dd22f
 css!panels/bettermap/leaflet/leaflet.css
 css!panels/bettermap/leaflet/plugins.css
 app/panels/bettermap/module.js
@@ -89,10 +79,7 @@ app/panels/histogram/timeSeries.js
 vendor/jquery/jquery.flot.selection.js
 vendor/jquery/jquery.flot.time.js
 vendor/jquery/jquery.flot.stack.js
-<<<<<<< HEAD
 vendor/jquery/jquery.flot.stackpercent.js
-=======
->>>>>>> 3446c24f3a651098f0a16ece681e0509f89dd22f
 app/panels/histogram/module.js
 
 app/panels/hits/module.js
@@ -110,10 +97,6 @@ app/panels/pie/module.js
 
 app/panels/query/module.js
 ----------------
-<<<<<<< HEAD
-=======
-vendor/require/css.js
->>>>>>> 3446c24f3a651098f0a16ece681e0509f89dd22f
 css!panels/query/query.css
 app/panels/query/module.js
 
