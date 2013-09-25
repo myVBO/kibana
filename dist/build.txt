@@ -49,6 +49,7 @@ vendor/jquery/jquery.flot.pie.js
 app/panels/bettermap/module.js
 ----------------
 app/panels/bettermap/leaflet/leaflet-src.js
+css!panels/bettermap/module.css
 css!panels/bettermap/leaflet/leaflet.css
 css!panels/bettermap/leaflet/plugins.css
 app/panels/bettermap/module.js
