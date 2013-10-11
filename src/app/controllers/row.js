@@ -16,6 +16,7 @@ function (angular, app, _) {
         collapsable: true,
         editable: true,
         panels: [],
+        notice: false
       };
 
       _.defaults($scope.row,_d);
@@ -34,11 +35,16 @@ function (angular, app, _) {
           $timeout(function() {
             $scope.$broadcast('render');
           });
+        } else {
+          row.notice = false;
         }
       };
 
       $scope.rowSpan = function(row) {
-        return _.reduce(_.pluck(row.panels,'span'), function(p,v) {
+        var panels = _.filter(row.panels, function(p) {
+          return $scope.isPanel(p);
+        });
+        return _.reduce(_.pluck(panels,'span'), function(p,v) {
           return p+v;
         },0);
       };
