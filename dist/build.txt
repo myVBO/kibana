@@ -28,6 +28,7 @@ app/services/kbnIndex.js
 app/services/querySrv.js
 app/services/timer.js
 app/services/panelMove.js
+app/services/esVersion.js
 app/services/all.js
 app/controllers/dash.js
 app/controllers/dashLoader.js
@@ -43,6 +44,7 @@ app/directives/ngBlur.js
 app/directives/ngModelOnBlur.js
 app/directives/tip.js
 app/directives/confirmClick.js
+app/directives/esVersion.js
 app/directives/all.js
 app/filters/all.js
 app/app.js

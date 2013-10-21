@@ -5301,6 +5301,10 @@ form input.ng-invalid {
 .bordered {
   border: 1px solid #dddddd;
 }
+.table-unpadded th,
+.table-unpadded td {
+  padding: 0px 2px;
+}
 .spy {
   position: absolute;
   right: 0px;
@@ -5371,11 +5375,6 @@ form input.ng-invalid {
 }
 .table tbody + tbody {
   border-top: 0px;
-}
-.panel-error {
-  opacity: 0.9;
-  position: absolute;
-  z-index: 1000;
 }
 .panel-loading {
   position: absolute;
@@ -5493,6 +5492,10 @@ div.flot-text {
   width: 100%;
   color: #333333;
   padding-left: 20px;
+}
+.panel-error {
+  color: #333333;
+  padding: 3px 10px 0px 10px;
 }
 /* ===================================================
  * popover-extra-placements.css v0.1
