@@ -14,9 +14,10 @@ function($, _, moment) {
   };
 
   kbn.get_all_fields = function(data) {
+    var _d = data;
     var fields = [];
-    _.each(data,function(hit) {
-      fields = _.uniq(fields.concat(_.keys(hit)));
+    _.each(_d,function(hit) {
+      fields = _.uniq(fields.concat(_.keys(kbn.flatten_json(hit._source))));
     });
     // Remove stupid angular key
     fields = _.without(fields,'$$hashKey');
@@ -315,6 +316,15 @@ function($, _, moment) {
       }
       unit = mathString.charAt(i++);
       switch (unit) {
+      case 'y':
+        if (type === 0) {
+          roundUp ? dateTime.endOf('year') : dateTime.startOf('year');
+        } else if (type === 1) {
+          dateTime.add('years',num);
+        } else if (type === 2) {
+          dateTime.subtract('years',num);
+        }
+        break;
       case 'M':
         if (type === 0) {
           roundUp ? dateTime.endOf('month') : dateTime.startOf('month');
