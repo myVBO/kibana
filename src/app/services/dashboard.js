@@ -57,7 +57,8 @@ function (angular, $, kbn, _, config, moment, Modernizr) {
       index: {
         interval: 'none',
         pattern: '_all',
-        default: 'INDEX_MISSING'
+        default: 'INDEX_MISSING',
+        warm_fields: true
       },
       refresh: false
     };
@@ -143,12 +144,13 @@ function (angular, $, kbn, _, config, moment, Modernizr) {
                 return false;
               }
             }
-            $rootScope.$broadcast('refresh');
+            // Don't resolve queries until indices are updated
+            querySrv.resolve().then(function(){$rootScope.$broadcast('refresh');});
           });
         } else {
           if(self.current.failover) {
             self.indices = [self.current.index.default];
-            $rootScope.$broadcast('refresh');
+            querySrv.resolve().then(function(){$rootScope.$broadcast('refresh');});
           } else {
             alertSrv.set("No time filter",
               'Timestamped indices are configured without a failover. Waiting for time filter.',
@@ -157,7 +159,7 @@ function (angular, $, kbn, _, config, moment, Modernizr) {
         }
       } else {
         self.indices = [self.current.index.default];
-        $rootScope.$broadcast('refresh');
+        querySrv.resolve().then(function(){$rootScope.$broadcast('refresh');});
       }
     };
 
@@ -183,19 +185,19 @@ function (angular, $, kbn, _, config, moment, Modernizr) {
       // Set the current dashboard
       self.current = _.clone(dashboard);
 
-      // Ok, now that we've setup the current dashboard, we can inject our services
-      querySrv = $injector.get('querySrv');
-      filterSrv = $injector.get('filterSrv');
+      // Delay this until we're sure that querySrv and filterSrv are ready
+      $timeout(function() {
+        // Ok, now that we've setup the current dashboard, we can inject our services
+        querySrv = $injector.get('querySrv');
+        filterSrv = $injector.get('filterSrv');
 
-      // Make sure these re-init
-      querySrv.init();
-      filterSrv.init();
-
-      // If there's an interval set, the indices have not been calculated yet,
-      // so there is no data. Call refresh to calculate the indices and notify the panels.
-      if(dashboard.index.interval !== 'none') {
+        // Make sure these re-init
+        querySrv.init();
+        filterSrv.init();
+      },0).then(function() {
+        // Call refresh to calculate the indices and notify the panels that we're ready to roll
         self.refresh();
-      }
+      });
 
       if(dashboard.refresh) {
         self.set_interval(dashboard.refresh);
@@ -273,7 +275,7 @@ function (angular, $, kbn, _, config, moment, Modernizr) {
 
     this.file_load = function(file) {
       return $http({
-        url: "app/dashboards/"+file+'?' + new Date().getTime(),
+        url: "app/dashboards/"+file.replace(/\.(?!json)/,"/")+'?' + new Date().getTime(),
         method: "GET",
         transformResponse: function(response) {
           return renderTemplate(response,$routeParams);
@@ -292,7 +294,7 @@ function (angular, $, kbn, _, config, moment, Modernizr) {
 
     this.elasticsearch_load = function(type,id) {
       return $http({
-        url: config.elasticsearch + "/" + config.kibana_index + "/"+type+"/"+id,
+        url: config.elasticsearch + "/" + config.kibana_index + "/"+type+"/"+id+'?' + new Date().getTime(),
         method: "GET",
         transformResponse: function(response) {
           return renderTemplate(angular.fromJson(response)._source.dashboard, $routeParams);
@@ -313,7 +315,7 @@ function (angular, $, kbn, _, config, moment, Modernizr) {
 
     this.script_load = function(file) {
       return $http({
-        url: "app/dashboards/"+file,
+        url: "app/dashboards/"+file.replace(/\.(?!js)/,"/"),
         method: "GET",
         transformResponse: function(response) {
           /*jshint -W054 */
