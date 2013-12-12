@@ -1,0 +1,5 @@
+
+npm install
+grunt clean
+grunt build
+
