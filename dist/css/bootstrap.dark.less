@@ -5896,7 +5896,8 @@ textarea[disabled],
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  color: #ffffff;
+  color: #52575c;
+  background: #272b30;
 }
 .form-actions {
   border-top: none;
@@ -5996,6 +5997,22 @@ a.thumbnail:hover {
     border-top: 1px solid transparent;
   }
 }
+div.editor-row {
+  vertical-align: top;
+}
+div.editor-row div.section {
+  margin-right: 20px;
+  vertical-align: top;
+  display: inline-block;
+}
+div.editor-option {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 10px;
+}
+div.editor-option label {
+  display: block;
+}
 #events {
   font-size: 12px;
 }
@@ -6011,6 +6028,9 @@ div.fake-input {
   -webkit-border-radius: 4px 4px 4px 4px;
   -moz-border-radius: 4px 4px 4px 4px;
   border-radius: 4px 4px 4px 4px;
+}
+hr.small {
+  margin: 5px 0px;
 }
 form input.ng-invalid {
   color: #b94a48;
@@ -6195,9 +6215,6 @@ a {
 .key {
   color: #c05c5a;
 }
-.typeahead {
-  z-index: 1051;
-}
 .btn-active {
   background-color: #E6E6E6;
   background-image: none;
@@ -6224,6 +6241,11 @@ div.flot-text {
 .panel-error {
   color: #c8c8c8;
   padding: 3px 10px 0px 10px;
+}
+.alert-warning {
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+  color: #c09853;
 }
 /* ===================================================
  * popover-extra-placements.css v0.1
